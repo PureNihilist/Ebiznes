@@ -1,0 +1,34 @@
+<h1>
+  Shopping cart
+</h1>
+
+<table class="table table-bordered table-hover">
+  <tr style="background-color: ghostwhite">
+    <th>Image</th>
+    <th>Name</th>
+    <th>Price</th>
+    <th>Amount</th>
+    <th>Sum</th>
+    <th>Actions</th>
+  </tr>
+
+  <tr *ngFor="let product of this.products" [hidden]="this.numberInBasket(product.prodId)==0">
+    <td><img class="prodImg" src="{{product.img}}" /></td>
+    <td>{{product.tytul}}</td>
+    <td>{{product.cena}}</td>
+    <td>{{this.numberInBasket(product.prodId)}}</td>
+    <td>{{this.priceForProduct(product.prodId)}}</td>
+    <td>
+      <button class="btn btn-info" (click)="this.shoppingcartService.addProduct(product.prodId)">Add one</button>
+      <button class="btn btn-danger" (click)="this.shoppingcartService.removeProduct(product.prodId)">Remove one</button>
+      <button class="btn btn-danger" (click)="this.shoppingcartService.removeProductAll(product.prodId)">Remove all</button>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="4"></td>
+    <td><strong>Sum:</strong> {{this.sumOfPrice()}}</td>
+    <td></td>
+  </tr>
+</table>
+
+<a href="/purchase" class="btn btn-success">Order products</a>

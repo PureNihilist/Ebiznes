@@ -1,0 +1,35 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+
+# Home page
+GET     /                           @controllers.Application.index
+GET     /product                    @controllers.ProductController.getAll
+POST    /product                    @controllers.ProductController.newProduct
+PUT     /product                    @controllers.ProductController.updateProduct
+DELETE  /product/:id                @controllers.ProductController.deleteProduct(id: Long)
+
+GET     /category                   @controllers.CategoryController.getAll
+POST    /category                   @controllers.CategoryController.newCategory
+PUT     /category                   @controllers.CategoryController.updateCategory
+DELETE  /category/:id               @controllers.CategoryController.deleteCategory(id: Long)
+
+GET     /shoppingcart/:id           @controllers.ShoppingCartController.getById(id)
+POST    /shoppingcart               @controllers.ShoppingCartController.newBasket
+DELETE  /shoppingcart/:id           @controllers.ShoppingCartController.deleteBasket(id)
+
+GET     /user/:id                   @controllers.UserController.getByUserId(id)
+GET     /registereduser             @controllers.UserController.getAll
+DELETE  /registereduser/:id         @controllers.UserController.deleteUser(id)
+
+GET     /purchase                   @controllers.PurchaseController.getAll
+POST    /purchase                   @controllers.PurchaseController.newPurchase
+DELETE  /purchase/:id               @controllers.PurchaseController.deletePurchase(id: Long)
+
+GET     /authenticate/:provider     controllers.SocialAuthController.authenticate(provider)
+POST    /authenticate/:provider     controllers.SocialAuthController.authenticate(provider)
+GET     /getLoggedUser              controllers.SocialAuthController.getLoggedUser
+GET     /logout                     controllers.SocialAuthController.logoutUser
+
+# Map static resources from the /public folder to the /assets URL path
+GET     /assets/*file               controllers.Assets.at(path="/public", file)

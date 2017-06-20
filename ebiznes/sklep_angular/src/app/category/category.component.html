@@ -1,0 +1,44 @@
+<h1>Categories Management</h1><br/><br/>
+
+
+<form [formGroup]="categoryForm" (ngSubmit)="addCategory($event)">
+  <div>
+    <div class="row">
+      <label for="nazwa" class="col-sm-offset-3 col-sm-1 labelPos">Nazwa</label>
+      <div class="col-sm-3"><input id="nazwa" formControlName="nazwa" type="text" placeholder="Nazwa kategorii" class="form-control" /></div>
+      <button type="submit" class="btn btn-success col-sm-1">Dodaj</button>
+    </div>
+
+  </div>
+</form>
+<br/><br/><br/>
+
+<table class="table table-striped table-bordered table-hover">
+  <tr>
+    <th>Category Id</th>
+    <th>Category name</th>
+    <th>Actions</th>
+  </tr>
+
+  <tr *ngFor="let category of this.categories">
+    <td>{{ category.catId }}</td>
+    <td  [ngSwitch]="category.catId != this.editCategoryId">
+      <div *ngSwitchCase="true">
+        {{ category.nazwa }}
+      </div>
+      <div *ngSwitchDefault>
+        <input id="nazwaEdit" type="text" placeholder="Nazwa kategorii" class="form-control" value="{{category.nazwa}}"/>
+      </div>
+    </td>
+    <td [ngSwitch]="category.catId != this.editCategoryId">
+      <div *ngSwitchCase="true">
+        <button class="btn btn-success btn-xs" (click)="editCategory(category.catId)">Edytuj</button>
+        <button class="btn btn-danger btn-xs" (click)="removeCategory(category.catId)">Usuń</button>
+      </div>
+      <div *ngSwitchDefault>
+        <button class="btn btn-success btn-xs" (click)="updateCategory(category.catId)">Zapisz</button>
+        <button class="btn btn-danger btn-xs" (click)="this.editCategoryId=-1">Anuluj</button>
+      </div>
+    </td>
+  </tr>
+</table>

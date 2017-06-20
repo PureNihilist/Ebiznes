@@ -1,0 +1,66 @@
+<h1>
+  Your order:
+</h1>
+
+<table class="table table-bordered table-hover">
+  <tr style="background-color: ghostwhite">
+    <th>Image</th>
+    <th>Name</th>
+    <th>Price</th>
+    <th>Amount</th>
+    <th>Sum</th>
+  </tr>
+
+  <tr *ngFor="let product of this.products" [hidden]="this.numberInBasket(product.prodId)==0">
+    <td><img class="prodImg" src="{{product.img}}" /></td>
+    <td>{{product.tytul}}</td>
+    <td>{{product.cena}}</td>
+    <td>{{this.numberInBasket(product.prodId)}}</td>
+    <td>{{this.priceForProduct(product.prodId)}}</td>
+  </tr>
+  <tr>
+    <td colspan="4"></td>
+    <td><strong>Sum:</strong> {{this.sumOfPrice()}}</td>
+  </tr>
+</table>
+
+<h1>
+  Fill up the blanks to proceed with order:
+</h1>
+
+<form [formGroup]="purchaseForm" (ngSubmit)="addPurchase($event)">
+
+  <div class="row">
+    <label for="adress" class="col-sm-offset-4 col-sm-1 labelPos">Adress</label>
+    <div class="col-sm-3"><textarea id="adress" formControlName="adress" type="text" placeholder="Adres" class="form-control" ></textarea></div>
+  </div>
+  <div class="row">
+    <label for="adress" class="col-sm-offset-4 col-sm-1 labelPos">Delivery</label>
+    <div class="col-sm-3" style="text-align: left">
+      <div *ngFor="let types of this.sendTypes; let i = index;">
+        <input type="radio" name="sendType" value="" (click)="this.chooseSendType(i)" [attr.checked]="i == 0 ? 'checked' : null"> {{types.name}} ( {{types.cost}}zł )<br>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <label class="col-sm-offset-4 col-sm-1 labelPos">To pay</label>
+    <div class="col-sm-1 labelPos">{{this.sumOfPrice()}}zł</div>
+  </div>
+  <div class="row">
+    <label class="col-sm-offset-4 col-sm-1 labelPos">Doostawa</label>
+    <div class="col-sm-1 labelPos">{{this.sendPrice()}}zł</div>
+  </div>
+  <div class="row">
+    <label class="col-sm-offset-4 col-sm-1 labelPos">Sum</label>
+    <div class="col-sm-1 labelPos">{{this.totalPrice()}}zł</div>
+  </div>
+
+  <button type="submit" id="purchaseBtn" class="btn btn-success col-sm-offset-5 col-sm-1">I buy</button>
+</form>
+<br/>
+<br/>
+<br/>
+<div class="row">
+  <div id="addedInfo" style="display: none"><strong>Order was accepted.</strong></div>
+</div>
+

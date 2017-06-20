@@ -1,0 +1,25 @@
+<h1>
+  Products
+</h1>
+
+<ul class="nav nav-tabs">
+  <li *ngFor="let category of this.categories ; let i = index;" [ngClass]="{active: i=='0'}">
+    <a data-toggle="tab" href="#cat{{category.catId}}">{{category.nazwa}}</a>
+  </li>
+</ul>
+
+<div class="tab-content">
+  <div *ngFor="let category of this.categories ; let i = index;" id="cat{{category.catId}}" class="tab-pane fade {{(i==0)? 'in active' : ''}}" >
+
+    <div *ngFor="let product of this.products" [hidden]="product.catId != category.catId" [ngClass]="{productContainer: product.catId == category.catId} ">
+      <img class="prodImg" src="{{product.img}}" />
+      <div class="title">{{product.tytul}}</div>
+      <div class="desc">{{product.opis}}</div>
+      <br/>
+      <div class="price">{{product.cena+" zł"}}</div>
+      <button class="btn btn-success" (click)="this.addToBasket(product.prodId)">Add to shopping cart</button>
+    </div>
+
+  </div>
+
+</div>

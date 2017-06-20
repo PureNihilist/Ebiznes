@@ -1,0 +1,27 @@
+<h1>List of users</h1><br/><br/>
+
+<table class="table table-striped table-bordered table-hover">
+  <tr>
+    <th>User ID</th>
+    <th>Provider</th>
+    <th>Name</th>
+    <th>Surname</th>
+    <th>Login </th>
+    <th>Email</th>
+    <th>Avatar</th>
+    <th>Admin privileges</th>
+    <th>Actions</th>
+  </tr>
+
+  <tr *ngFor="let user of this.users">
+    <td>{{user.userId}}</td>
+    <td>{{user.provider}}</td>
+    <td>{{user.firstName}}</td>
+    <td>{{user.lastName}}</td>
+    <td>{{user.fullName}}</td>
+    <td>{{user.email}}</td>
+    <td><img src="{{user.avatarUrl}}" /></td>
+    <td>{{ (user.isAdmin == 1)? "TAK" : "nie" }}</td>
+    <td><button class="btn btn-danger btn-xs" (click)="this.removeUser(user.userId)">Usuń</button></td>
+  </tr>
+</table>

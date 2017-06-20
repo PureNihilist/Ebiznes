@@ -1,0 +1,33 @@
+<script src="../app.service.ts"></script><h1>
+  Orders
+</h1>
+
+<table class="table table-striped table-bordered table-hover">
+  <tr>
+    <th>Id</th>
+    <th>Date</th>
+    <th>Products</th>
+    <th>Price</th>
+    <th>Delivery</th>
+    <th>User</th>
+    <th>Address</th>
+    <th>Actions</th>
+
+  </tr>
+
+  <tr *ngFor="let purchase of this.purchases">
+    <td>{{ purchase.id }}</td>
+    <td>{{ purchase.date }}</td>
+    <td>
+      <div *ngFor="let arr of this.getProductList(purchase.jsonOrder)">
+        {{arr}}
+      </div>
+    </td>
+    <td>{{purchase.totalPrice}}zł</td>
+    <td>{{purchase.sendType}}</td>
+    <td>{{this.getUsername(purchase.userId)}}</td>
+    <td>{{purchase.adress}}</td>
+    <td><button class="btn btn-danger btn-xs" (click)="this.deletePurchase(purchase.id)">Delete</button></td>
+  </tr>
+
+</table>

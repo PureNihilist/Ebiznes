@@ -1,0 +1,38 @@
+.productContainer
+{
+  border-color: gray;
+  border-style: solid;
+  display: inline-block;
+  border-width: 1px;
+  border-radius: 5px;
+  padding: 5px;
+  margin: 10px;
+  width: 220px;
+}
+
+.productContainer:hover
+{
+  background-color: rgba(190,190,190,0.13);
+}
+
+.prodImg
+{
+  width: 200px;
+  height: 200px;
+}
+
+.title
+{
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.desc
+{
+  font-size: 15px;
+}
+
+.price
+{
+  font-style: italic;
+}
